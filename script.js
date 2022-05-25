@@ -1,8 +1,6 @@
 let userList = document.getElementById('loginForm');
+userList.innerHTML ="";
 
-    userList.innerHTML ="";
-
-// fetch("http://localhost:4000/api/post/:key")
 fetch("http://localhost:4000/api/post")
 .then(res => res.json())
 .then(data => {
@@ -10,7 +8,7 @@ fetch("http://localhost:4000/api/post")
 
     data.forEach(user => {
         let userItem = document.createElement('li');
-        userItem.innerHTML = `${user.email} ${user.password}`;
+        userItem.innerHTML = `email/user name =>  ${user.email} <br> password =>  ${user.password}`;
         userList.appendChild(userItem);
     })
 });
@@ -27,7 +25,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         password: password
     };
 
-    fetch('http://localhost:4000/api/postß', {
+    fetch('http://localhost:4000/api/post', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -41,7 +39,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         if (data === 'success'){
             console.log('It works!This is from script.js(front)');
             //Save to Localstorage
-            let userId = data.userId;
+            // let userId = data.userId;
         } else {
             console.log('It does not works!This is from script.js(front)');
         }

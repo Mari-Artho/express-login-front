@@ -69,36 +69,39 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
             setLoggedInScreen(data.email);
             
         } else {
-            console.log('ログイン失敗だよ！！泣く！！');
-            // TODO: show failure in frontend, not just console
+            loginFailMessage();
         }
     });
-
 });
 
-//ログインに成功したらブラウザーで見せるページを作ってる
-  let username = data.email;
-  function setLoggedInScreen(username) {
-    // // remember session
-    // localStorage.setItem("loggedInUser", username);
-    let upperName = username.toUpperCase();
-    loginResult.textContent = `You are log in ${upperName} ✨ Do you want to subscribe or not? `;
-    //create logout button.
-    const subscribeBtn = document.createElement("button");
-    subscribeBtn.innerText = " Subscribe";
-    loginResult.append(subscribeBtn);
-    //add id name to logout btn.
-    subscribeBtn.setAttribute("id", "subscribe");
-  
-    //css, display colmun
-    document.getElementById("loginResult").style.display = "flex";
-    document.getElementById("loginResult").style.flexDirection = "column";
-    //hide section(login) area.
-    document.querySelector("section").style.display = "none";
-    //decoration css
-    // document.querySelector("header").style.height = "450px";
-    // logoutBtn.style.marginTop = "70px";
-    // //click button, subscribe
-    // const btnLogout = document.getElementById("subscribeBtn");
-    // btnLogout.addEventListener("click", logout);
-  }
+//Page to show in the browser when log in is successful
+function setLoggedInScreen(username) {
+  // // remember session
+  // localStorage.setItem("loggedInUser", username);
+  let upperName = username.toUpperCase();
+  loginResult.textContent = `You are log in ${upperName} ✨ Do you want to subscribe or not? `;
+  //create logout button.
+  const subscribeBtn = document.createElement("button");
+  subscribeBtn.innerText = " Subscribe";
+  loginResult.append(subscribeBtn);
+  //add id name to logout btn.
+  subscribeBtn.setAttribute("id", "subscribe");
+
+  //css, display colmun
+  document.getElementById("loginResult").style.display = "flex";
+  document.getElementById("loginResult").style.flexDirection = "column";
+  //hide section(login) area.
+  document.querySelector("section").style.display = "none";
+  //decoration css
+  // document.querySelector("header").style.height = "450px";
+  // logoutBtn.style.marginTop = "70px";
+  // //click button, subscribe
+  // const btnLogout = document.getElementById("subscribeBtn");
+  // btnLogout.addEventListener("click", logout);
+}//after log in success page
+
+function loginFailMessage(){
+    alert("Log in failed. Please try again.");
+    
+}
+

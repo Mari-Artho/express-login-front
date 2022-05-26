@@ -69,17 +69,15 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         },
        body: JSON.stringify(user)
     })
-    .then(res => res.json())
+    .then(res => res.json()) // parse result
     .then(data => {
-        console.log(data);
-
         //この下のdataはidも入っているから、email&passwordだけにしないと合致しない！！シリル！
-        if (data.email != ""){
-            console.log('Log in 成功だよ！！');
-            //Save to Localstorage
-            //let userId = data.userId;
+        if (data.email != ""){ // empty user data <=> login failed
+            console.log('Log in 成功だよ！！'); // user info is in "data"
+            // TODO: use user info, (later) indicate if subscribed or not
         } else {
             console.log('ログイン失敗だよ！！泣く！！');
+            // TODO: show failure in frontend, not just console
         }
     });
 

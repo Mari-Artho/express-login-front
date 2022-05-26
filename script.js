@@ -74,7 +74,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         console.log(data);
 
         //この下のdataはidも入っているから、email&passwordだけにしないと合致しない！！シリル！
-        if (data == 'loginSuccess'){
+        if (data.email != ""){
             console.log('Log in 成功だよ！！');
             //Save to Localstorage
             //let userId = data.userId;

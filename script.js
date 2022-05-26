@@ -77,31 +77,28 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
 });
 
 //ログインに成功したらブラウザーで見せるページを作ってる
-// if (username != null) {
-//     setLoggedInScreen(username);
-//   }
   let username = data.email;
   function setLoggedInScreen(username) {
     // // remember session
     // localStorage.setItem("loggedInUser", username);
     let upperName = username.toUpperCase();
-    loginResult.textContent = `Welcome ${upperName} ❤️ Do you want to subscribe? `;
+    loginResult.textContent = `You are log in ${upperName} ✨ Do you want to subscribe or not? `;
     //create logout button.
-    const logoutBtn = document.createElement("button");
-    logoutBtn.innerText = "LOGOUT";
-    loginResult.append(logoutBtn);
-    // //add id name to logout btn.
-    // logoutBtn.setAttribute("id", "logout");
+    const subscribeBtn = document.createElement("button");
+    subscribeBtn.innerText = " Subscribe";
+    loginResult.append(subscribeBtn);
+    //add id name to logout btn.
+    subscribeBtn.setAttribute("id", "subscribe");
   
-    // //css, display colmun
-    // document.getElementById("loginResult").style.display = "flex";
-    // document.getElementById("loginResult").style.flexDirection = "column";
-    // //hide section(login) area.
-    // document.querySelector("section").style.display = "none";
-    // // //decoration css
-    // // document.querySelector("header").style.height = "450px";
-    // // logoutBtn.style.marginTop = "70px";
-    // // //click button, logout
-    // const btnLogout = document.getElementById("logout");
+    //css, display colmun
+    document.getElementById("loginResult").style.display = "flex";
+    document.getElementById("loginResult").style.flexDirection = "column";
+    //hide section(login) area.
+    document.querySelector("section").style.display = "none";
+    //decoration css
+    // document.querySelector("header").style.height = "450px";
+    // logoutBtn.style.marginTop = "70px";
+    // //click button, subscribe
+    // const btnLogout = document.getElementById("subscribeBtn");
     // btnLogout.addEventListener("click", logout);
   }

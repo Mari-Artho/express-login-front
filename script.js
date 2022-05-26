@@ -65,7 +65,6 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     .then(data => {
         if (data.email != ""){ // empty user data <=> login failed
             console.log('Log in 成功だよ！！'); // user info is in "data"
-            // TODO: use user info, (later) indicate if subscribed or not　
             setLoggedInScreen(data.email);
             
         } else {
@@ -76,15 +75,13 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
 
 //Page to show in the browser when log in is successful
 function setLoggedInScreen(username) {
-  // // remember session
-  // localStorage.setItem("loggedInUser", username);
   let upperName = username.toUpperCase();
   loginResult.textContent = `You are log in ${upperName} ✨ Do you want to subscribe or not? `;
-  //create logout button.
+  //create subscribe button.
   const subscribeBtn = document.createElement("button");
-  subscribeBtn.innerText = " Subscribe";
+  subscribeBtn.innerText = " SUBSCRIBE";
   loginResult.append(subscribeBtn);
-  //add id name to logout btn.
+  //add id to subscribe btn.
   subscribeBtn.setAttribute("id", "subscribe");
 
   //css, display colmun
@@ -95,13 +92,23 @@ function setLoggedInScreen(username) {
   //decoration css
   // document.querySelector("header").style.height = "450px";
   // logoutBtn.style.marginTop = "70px";
-  // //click button, subscribe
-  // const btnLogout = document.getElementById("subscribeBtn");
-  // btnLogout.addEventListener("click", logout);
-}//after log in success page
-
+  //click button, subscribe
+  const setSubscribe = document.getElementById("subscribe");
+  setSubscribe.addEventListener("click", settingSubscribe);
+}
 function loginFailMessage(){
     alert("Log in failed. Please try again.");
     
 }
+
+//Subscribe button
+function settingSubscribe(){
+    document.getElementById('subscribe').addEventListener('click',(e)=> {
+        e.preventDefault();
+        console.log("Thank you sb!")
+        alert("Thank you for subscribe");
+    } )
+}
+
+
 

@@ -1,4 +1,7 @@
-//Sign up form 
+//show html after login success
+const loginResult = document.getElementById("loginResult");
+
+//Show all sign up users at list
 let userList = document.getElementById('signupForm');
 userList.innerHTML ="";
 
@@ -24,7 +27,8 @@ document.getElementById('signupBtn').addEventListener('click', (e)=>{
 
     let user = {
         email: email,
-        password: password
+        password: password,
+        subscribe: false
     };
 
     fetch('http://localhost:4000/signup', {
@@ -35,18 +39,6 @@ document.getElementById('signupBtn').addEventListener('click', (e)=>{
         body: JSON.stringify(user)
     })
     .then(res => res.json())
-    .then(data => {
-        console.log(data);
-
-        if (data === 'success'){
-            console.log('It works!This is from script.js(front)');
-            //Save to Localstorage
-             let userId = data.userId;
-        } else {
-            console.log('It does not works!This is from script.js(front)');
-        }
-    });
-
 });
 
 //Log in button
@@ -71,10 +63,11 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     })
     .then(res => res.json()) // parse result
     .then(data => {
-        //この下のdataはidも入っているから、email&passwordだけにしないと合致しない！！シリル！
         if (data.email != ""){ // empty user data <=> login failed
             console.log('Log in 成功だよ！！'); // user info is in "data"
-            // TODO: use user info, (later) indicate if subscribed or not
+            // TODO: use user info, (later) indicate if subscribed or not　
+            setLoggedInScreen(data.email);
+            
         } else {
             console.log('ログイン失敗だよ！！泣く！！');
             // TODO: show failure in frontend, not just console
@@ -82,3 +75,33 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     });
 
 });
+
+//ログインに成功したらブラウザーで見せるページを作ってる
+// if (username != null) {
+//     setLoggedInScreen(username);
+//   }
+  let username = data.email;
+  function setLoggedInScreen(username) {
+    // // remember session
+    // localStorage.setItem("loggedInUser", username);
+    let upperName = username.toUpperCase();
+    loginResult.textContent = `Welcome ${upperName} ❤️ Do you want to subscribe? `;
+    //create logout button.
+    const logoutBtn = document.createElement("button");
+    logoutBtn.innerText = "LOGOUT";
+    loginResult.append(logoutBtn);
+    // //add id name to logout btn.
+    // logoutBtn.setAttribute("id", "logout");
+  
+    // //css, display colmun
+    // document.getElementById("loginResult").style.display = "flex";
+    // document.getElementById("loginResult").style.flexDirection = "column";
+    // //hide section(login) area.
+    // document.querySelector("section").style.display = "none";
+    // // //decoration css
+    // // document.querySelector("header").style.height = "450px";
+    // // logoutBtn.style.marginTop = "70px";
+    // // //click button, logout
+    // const btnLogout = document.getElementById("logout");
+    // btnLogout.addEventListener("click", logout);
+  }

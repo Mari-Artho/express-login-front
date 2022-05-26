@@ -2,7 +2,7 @@
 let userList = document.getElementById('signupForm');
 userList.innerHTML ="";
 
-fetch("http://localhost:4000/api/post")
+fetch("http://localhost:4000/users")
 .then(res => res.json())
 .then(data => {
     console.log(data);
@@ -27,7 +27,7 @@ document.getElementById('signupBtn').addEventListener('click', (e)=>{
         password: password
     };
 
-    fetch('http://localhost:4000/api/post', {
+    fetch('http://localhost:4000/signup', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -54,15 +54,15 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
 
     e.preventDefault();
 
-    let loginEmail = document.getElementById('email').value;
-    let loginPassword = document.getElementById('password').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
 
     let user = {
-        email: loginEmail,
-        password: loginPassword
+        email: email,
+        password: password
     };
 
-    fetch('http://localhost:4000/api/post', {
+    fetch('http://localhost:4000/login', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -73,8 +73,9 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     .then(data => {
         console.log(data);
 
-        if (data === 'success'){
-            console.log('Log in　成功だよ！！');
+        //この下のdataはidも入っているから、email&passwordだけにしないと合致しない！！シリル！
+        if (data == 'loginSuccess'){
+            console.log('Log in 成功だよ！！');
             //Save to Localstorage
             //let userId = data.userId;
         } else {

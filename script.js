@@ -84,9 +84,19 @@ function setLoggedInScreen(username) {
   //add id to subscribe btn.
   subscribeBtn.setAttribute("id", "subscribe");
 
-  //css, display colmun
-  document.getElementById("loginResult").style.display = "flex";
-  document.getElementById("loginResult").style.flexDirection = "column";
+  //css, message
+//   document.getElementById("loginResult").style.display = "flex";
+//   document.getElementById("loginResult").style.flexDirection = "column";
+  document.getElementById("loginResult").style.fontFamily = "Rubik";
+  document.getElementById("loginResult").style.color = "red";
+
+  //css, subscribe button
+  document.getElementById("subscribe").style.height = "60px";
+  document.getElementById("subscribe").style.width = "400px";
+  document.getElementById("subscribe").style.margin = "30px";
+ 
+
+
   //hide section(login) area.
   document.querySelector("section").style.display = "none";
   //decoration css
@@ -104,6 +114,7 @@ function loginFailMessage(){
 //Subscribe button
 function settingSubscribe(){
     document.getElementById('subscribe').addEventListener('click',(e)=> {
+        //ここでデータをfetchして、購読がtrueかfalseによって、ボタン表示を変えないといけない。ぎゃー。
         e.preventDefault();
         console.log("Thank you sb!")
         alert("Thank you for subscribe");

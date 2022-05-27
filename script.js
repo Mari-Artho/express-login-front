@@ -85,23 +85,18 @@ function setLoggedInScreen(username) {
   subscribeBtn.setAttribute("id", "subscribe");
 
   //css, message
-//   document.getElementById("loginResult").style.display = "flex";
-//   document.getElementById("loginResult").style.flexDirection = "column";
-  document.getElementById("loginResult").style.fontFamily = "Rubik";
-  document.getElementById("loginResult").style.color = "red";
+  loginResult.style.display = "flex";
+  loginResult.style.flexDirection = "column";
+  loginResult.style.fontFamily = "Rubik";
+  loginResult.style.color = "red";
 
   //css, subscribe button
-  document.getElementById("subscribe").style.height = "60px";
-  document.getElementById("subscribe").style.width = "400px";
-  document.getElementById("subscribe").style.margin = "30px";
+  subscribeBtn.style.height = "60px";
+  subscribeBtn.style.width = "400px";
+  subscribeBtn.style.margin = "30px";
  
-
-
   //hide section(login) area.
   document.querySelector("section").style.display = "none";
-  //decoration css
-  // document.querySelector("header").style.height = "450px";
-  // logoutBtn.style.marginTop = "70px";
   //click button, subscribe
   const setSubscribe = document.getElementById("subscribe");
   setSubscribe.addEventListener("click", settingSubscribe);

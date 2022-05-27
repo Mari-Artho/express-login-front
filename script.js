@@ -12,7 +12,7 @@ fetch("http://localhost:4000/users")
 
     data.forEach(user => {
         let userItem = document.createElement('li');
-        userItem.innerHTML = ` ${user.email} <br>  ${user.password}`;
+        userItem.innerHTML = ` ${user.email}, ${user.password}, subscribed: ${user.subscribe}<br>`;
         userList.appendChild(userItem);
     })
 });
@@ -65,7 +65,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     .then(data => {
         if (data.email != ""){ // empty user data <=> login failed
             console.log('Log in 成功だよ！！'); // user info is in "data"
-            setLoggedInScreen(data.email);
+            setLoggedInScreen(data);
             
         } else {
             loginFailMessage();
@@ -74,12 +74,13 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
 });
 
 //Page to show in the browser when log in is successful
-function setLoggedInScreen(username) {
+function setLoggedInScreen(data) {
+    let username = data.email;
   let upperName = username.toUpperCase();
   loginResult.textContent = `You are log in ${upperName} ✨ Do you want to subscribe or not? `;
   //create subscribe button.
   const subscribeBtn = document.createElement("button");
-  subscribeBtn.innerText = " SUBSCRIBE";
+  subscribeBtn.innerText = (data.subscribe ? "UN" : "") + "SUBSCRIBE";
   loginResult.append(subscribeBtn);
   //add id to subscribe btn.
   subscribeBtn.setAttribute("id", "subscribe");
@@ -97,10 +98,12 @@ function setLoggedInScreen(username) {
  
   //hide section(login) area.
   document.querySelector("section").style.display = "none";
-  //click button, subscribe
+
+  //click button => subscribe
   const setSubscribe = document.getElementById("subscribe");
   setSubscribe.addEventListener("click", settingSubscribe);
 }
+
 function loginFailMessage(){
     alert("Log in failed. Please try again.");
     
@@ -108,13 +111,11 @@ function loginFailMessage(){
 
 //Subscribe button
 function settingSubscribe(){
-    document.getElementById('subscribe').addEventListener('click',(e)=> {
-        //ここでデータをfetchして、購読がtrueかfalseによって、ボタン表示を変えないといけない。ぎゃー。
-        e.preventDefault();
-        console.log("Thank you sb!")
-        alert("Thank you for subscribe");
-    } )
+    // document.getElementById('subscribe').addEventListener('click',(e)=> {
+       // e.preventDefault();
+        console.log("Thank you 購読ありがとう!");
+         //ここでデータをfetchして、購読がtrueかfalseによって、ボタン表示を変えないといけない。ぎゃー。
+// TODO: Update subscribe status
+ //   } 
+ //   )
 }
-
-
-

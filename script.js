@@ -90,8 +90,6 @@ function setLoggedInScreen(data) {
   loginResult.style.display = "flex";
   loginResult.style.flexDirection = "column";
   loginResult.style.fontFamily = "Rubik";
-  loginResult.style.color = "red";
-
   //css, subscribe button
   subscribeBtn.style.height = "60px";
   subscribeBtn.style.width = "400px";
@@ -110,10 +108,17 @@ function setLoggedInScreen(data) {
 
   //create back to page button.
   const backBtn = document.createElement("button");
-  backBtn.innerText = "BACK TO PAGE";
+  backBtn.innerHTML = '<a id="backLink" href="index.html">Back</a>';
   loginResult.append(backBtn);
-  //add id to subscribe btn.
-  backBtn.setAttribute("id", "backBtn");
+
+  //css, backBtn
+  backBtn.style.height = "40px";
+  backBtn.style.width = "100px";
+  backBtn.style.margin = "30px";
+  const backLink = document.getElementById("backLink");
+  backLink.style.textDecoration = "none";
+  backLink.style.color = "black";
+
 
     data.subscribe = !data.subscribe;
 
@@ -136,6 +141,8 @@ function loginFailMessage(){
     alert("Log in failed. Please try again.");
     
 }
+
+
 
 
 

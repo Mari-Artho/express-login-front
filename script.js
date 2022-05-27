@@ -102,6 +102,23 @@ function setLoggedInScreen(data) {
   //click button => subscribe
   const setSubscribe = document.getElementById("subscribe");
   setSubscribe.addEventListener("click", settingSubscribe);
+  //Subscribe button
+function settingSubscribe(){
+    console.log("Thank you 購読ありがとう!");
+    data.subscribe = !data.subscribe;
+     //ここでデータをfetchして、購読がtrueかfalseによって、ボタン表示を変えないといけない。ぎゃー。
+     fetch('http://localhost:4000/subscribe', {
+         method: 'put',
+     headers: {
+         'Content-Type': 'application/json'
+     },
+     body: JSON.stringify(data)
+     })
+     .then(res => res.json())
+     .then(data =>{
+         console.log(data);
+     })
+}
 }
 
 function loginFailMessage(){
@@ -109,13 +126,3 @@ function loginFailMessage(){
     
 }
 
-//Subscribe button
-function settingSubscribe(){
-    // document.getElementById('subscribe').addEventListener('click',(e)=> {
-       // e.preventDefault();
-        console.log("Thank you 購読ありがとう!");
-         //ここでデータをfetchして、購読がtrueかfalseによって、ボタン表示を変えないといけない。ぎゃー。
-// TODO: Update subscribe status
- //   } 
- //   )
-}

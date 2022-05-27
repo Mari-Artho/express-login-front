@@ -38,6 +38,7 @@ document.getElementById('signupBtn').addEventListener('click', (e)=>{
         },
         body: JSON.stringify(user)
     })
+    .then(r => console.log(r.status >= 300 ? "Problem: " + r.status : "Signed up successfully"))
     .then(res => res.json())
 });
 
@@ -75,9 +76,9 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
 
 //Page to show in the browser when log in is successful
 function setLoggedInScreen(data) {
-    let username = data.email;
+  let username = data.email;
   let upperName = username.toUpperCase();
-  loginResult.textContent = `You are log in ${upperName} ✨ Do you want to subscribe or not? `;
+  loginResult.textContent = `✨  You are log in ${upperName} ✨  `;
   //create subscribe button.
   const subscribeBtn = document.createElement("button");
   subscribeBtn.innerText = (data.subscribe ? "UN" : "") + "SUBSCRIBE";
@@ -103,10 +104,19 @@ function setLoggedInScreen(data) {
   const setSubscribe = document.getElementById("subscribe");
   setSubscribe.addEventListener("click", settingSubscribe);
   //Subscribe button
-function settingSubscribe(){
-    console.log("Thank you 購読ありがとう!");
+  function settingSubscribe(){
+     subscribeBtn.disabled = "disabled";
+     subscribeBtn.innerText = (data.subscribe ? "You are now unsubscribed" : "Thank you for your subscription") ;
+
+  //create back to page button.
+  const backBtn = document.createElement("button");
+  backBtn.innerText = "BACK TO PAGE";
+  loginResult.append(backBtn);
+  //add id to subscribe btn.
+  backBtn.setAttribute("id", "backBtn");
+
     data.subscribe = !data.subscribe;
-     //ここでデータをfetchして、購読がtrueかfalseによって、ボタン表示を変えないといけない。ぎゃー。
+
      fetch('http://localhost:4000/subscribe', {
          method: 'put',
      headers: {
@@ -117,6 +127,7 @@ function settingSubscribe(){
      .then(res => res.json())
      .then(data =>{
          console.log(data);
+
      })
 }
 }
@@ -125,4 +136,6 @@ function loginFailMessage(){
     alert("Log in failed. Please try again.");
     
 }
+
+
 

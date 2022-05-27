@@ -54,6 +54,11 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     let messageAdmin = document.createElement('div');
      messageAdmin.innerHTML = `Admin page`;
      admin.appendChild(messageAdmin);
+    //create back to page button.
+    let adminBtn = document.getElementById("adminBtn");
+  const backBtn = document.createElement("button");
+  backBtn.innerHTML = '<a id="backLink" href="index.html">Back</a>';
+  adminBtn.append(backBtn);
       
     //show html after login success
     const loginResult = document.getElementById("loginResult");
@@ -89,7 +94,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
 function setLoggedInScreen(data) {
   let username = data.email;
   let upperName = username.toUpperCase();
-  loginResult.textContent = `✨  You are log in ${upperName} ✨  `;
+  loginResult.textContent = `✨ You are log in ${upperName} ✨  `;
   //create subscribe button.
   const subscribeBtn = document.createElement("button");
   subscribeBtn.innerText = (data.subscribe ? "UN" : "") + "SUBSCRIBE";
@@ -115,11 +120,11 @@ function setLoggedInScreen(data) {
   //Subscribe button
   function settingSubscribe(){
      subscribeBtn.disabled = "disabled";
-     subscribeBtn.innerText = (data.subscribe ? "You are now unsubscribed" : "Thank you for your subscription") ;
+     subscribeBtn.innerText = (data.subscribe ? "You are now unsubscribed" : "Thank you for your subscription　📫") ;
 
   //create back to page button.
   const backBtn = document.createElement("button");
-  backBtn.innerHTML = '<a id="backLink" href="index.html">Back</a>';
+  backBtn.innerHTML = '<a id="backLink" href="index.html">Log out</a>';
   loginResult.append(backBtn);
 
   //css, backBtn

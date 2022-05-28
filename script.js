@@ -88,6 +88,7 @@ function setLoggedInScreen(data) {
   function settingSubscribe(){
      subscribeBtn.disabled = "disabled";
      subscribeBtn.innerText = (data.subscribe ? "You are now unsubscribed" : "Thank you for your subscription　📫") ;
+  }
 
   //create back to page button.
   const backBtn = document.createElement("button");
@@ -124,7 +125,6 @@ function setLoggedInScreen(data) {
          console.log(data);
 
      })
-}
 }
 
 function loginFailMessage(){

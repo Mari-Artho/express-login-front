@@ -19,8 +19,8 @@ document.getElementById('signupBtn').addEventListener('click', (e)=>{
         },
         body: JSON.stringify(user)
     })
-    .then(r => console.log(r.status >= 300 ? "Problem: " + r.status : "Signed up successfully"))
     .then(res => res.json())
+    .then(data => setLoggedInScreen(data))
 });
 
 //Log in button

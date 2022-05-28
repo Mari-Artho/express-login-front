@@ -88,6 +88,16 @@ function setLoggedInScreen(data) {
   function settingSubscribe(){
      subscribeBtn.disabled = "disabled";
      subscribeBtn.innerText = (data.subscribe ? "You are now unsubscribed" : "Thank you for your subscription　📫") ;
+
+    data.subscribe = !data.subscribe;
+
+    fetch('http://localhost:5000/subscribe', {
+        method: 'put',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+    })
   }
 
   //create back to page button.
@@ -109,22 +119,6 @@ function setLoggedInScreen(data) {
   const backLink = document.getElementById("backLink");
   backLink.style.textDecoration = "none";
   backLink.style.color = "black";
-
-
-    data.subscribe = !data.subscribe;
-
-     fetch('http://localhost:5000/subscribe', {
-         method: 'put',
-     headers: {
-         'Content-Type': 'application/json'
-     },
-     body: JSON.stringify(data)
-     })
-     .then(res => res.json())
-     .then(data =>{
-         console.log(data);
-
-     })
 }
 
 function loginFailMessage(){

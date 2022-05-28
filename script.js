@@ -12,7 +12,7 @@ document.getElementById('signupBtn').addEventListener('click', (e)=>{
         subscribe: false
     };
 
-    fetch('http://localhost:4000/signup', {
+    fetch('http://localhost:5000/signup', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         password: password
     };
 
-    fetch('http://localhost:4000/login', {
+    fetch('http://localhost:5000/login', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -45,56 +45,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     })
     .then(res => res.json()) // parse result
     .then(data => {
-        if((email == "admin" && password == "admin")){
-    //hide section(login) area.
-    document.querySelector("section").style.display = "none";
-    document.getElementById("loginResult").style.display = "none";
-    //admin message
-    let admin = document.getElementById("adminMessage");
-    let messageAdmin = document.createElement('div');
-    messageAdmin.innerHTML = `Admin page <br> All users`;
-    admin.appendChild(messageAdmin);
-    //create back to page button.
-    let adminBtn = document.getElementById("adminBtn");
-    const backBtn = document.createElement("button");
-    backBtn.innerHTML = '<a id="backLink" href="index.html">Back</a>';
-    adminBtn.append(backBtn);
-      
-    //show html after login success
-    const loginResult = document.getElementById("loginResult");
-    //Show all sign up users at list
-    let userList = document.getElementById('signupForm');
-    userList.innerHTML ="";
-    //Show subscribed users
-    let subscriberList = document.getElementById('subscriber');
-    subscriberList.innerHTML ="";
-
-    fetch("http://localhost:4000/users")
-    .then(res => res.json())
-    .then(data => {
-    console.log(data);
-
-    //Show all users
-    data.forEach(user => {
-        let userItem = document.createElement('li');
-        userItem.innerHTML = `name/email:  ${user.email},  password: ${user.password},  ${user.subscribe ? 'Subscribed': 'Not subscribed'}<br>`;
-        userList.appendChild(userItem);
-    })
-    
-    //Show email + subsucribers
-    let subscriberTitle = document.getElementById('subscribedTitle');
-    subscriberTitle.innerText = "Subscribed users";
-            data.forEach(user => {
-            if(user.subscribe){
-            let subscriber = document.createElement('li');
-            subscriber.innerHTML = ` ${user.email}`;
-            subscriberList.appendChild(subscriber);
-        }
-    })
-});
-
-        }
-        else if (data.email != ""){ 
+        if (data.email != ""){ 
             // empty user data <=> login failed
             console.log('Log in 成功だよ！！'); // user info is in "data"
             setLoggedInScreen(data);
@@ -153,7 +104,7 @@ function setLoggedInScreen(data) {
 
     data.subscribe = !data.subscribe;
 
-     fetch('http://localhost:4000/subscribe', {
+     fetch('http://localhost:5000/subscribe', {
          method: 'put',
      headers: {
          'Content-Type': 'application/json'

@@ -52,7 +52,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     //admin message
     let admin = document.getElementById("adminMessage");
     let messageAdmin = document.createElement('div');
-    messageAdmin.innerHTML = `Admin page`;
+    messageAdmin.innerHTML = `Admin page <br> All users`;
     admin.appendChild(messageAdmin);
     //create back to page button.
     let adminBtn = document.getElementById("adminBtn");
@@ -65,16 +65,31 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     //Show all sign up users at list
     let userList = document.getElementById('signupForm');
     userList.innerHTML ="";
+    //Show subscribed users
+    let subscriberList = document.getElementById('subscriber');
+    subscriberList.innerHTML ="";
 
     fetch("http://localhost:4000/users")
     .then(res => res.json())
     .then(data => {
     console.log(data);
 
+    //Show all users
     data.forEach(user => {
         let userItem = document.createElement('li');
-        userItem.innerHTML = ` ${user.email}, ${user.password}, subscribed: ${user.subscribe}<br>`;
+        userItem.innerHTML = `name/email:  ${user.email},  password: ${user.password},  ${user.subscribe ? 'Subscribed': 'Not subscribed'}<br>`;
         userList.appendChild(userItem);
+    })
+    
+    //Show email + subsucribers
+    let subscriberTitle = document.getElementById('subscribedTitle');
+    subscriberTitle.innerText = "Subscribed users";
+            data.forEach(user => {
+            if(user.subscribe){
+            let subscriber = document.createElement('li');
+            subscriber.innerHTML = ` ${user.email}`;
+            subscriberList.appendChild(subscriber);
+        }
     })
 });
 

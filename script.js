@@ -41,7 +41,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         headers: {
             'Content-Type': 'application/json'
         },
-       body: JSON.stringify(user)
+        body: JSON.stringify(user)
     })
     .then(res => res.json()) // parse result
     .then(data => {
@@ -52,13 +52,13 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     //admin message
     let admin = document.getElementById("adminMessage");
     let messageAdmin = document.createElement('div');
-     messageAdmin.innerHTML = `Admin page`;
-     admin.appendChild(messageAdmin);
+    messageAdmin.innerHTML = `Admin page`;
+    admin.appendChild(messageAdmin);
     //create back to page button.
     let adminBtn = document.getElementById("adminBtn");
-  const backBtn = document.createElement("button");
-  backBtn.innerHTML = '<a id="backLink" href="index.html">Back</a>';
-  adminBtn.append(backBtn);
+    const backBtn = document.createElement("button");
+    backBtn.innerHTML = '<a id="backLink" href="index.html">Back</a>';
+    adminBtn.append(backBtn);
       
     //show html after login success
     const loginResult = document.getElementById("loginResult");
@@ -75,7 +75,6 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         let userItem = document.createElement('li');
         userItem.innerHTML = ` ${user.email}, ${user.password}, subscribed: ${user.subscribe}<br>`;
         userList.appendChild(userItem);
-       
     })
 });
 
@@ -84,6 +83,7 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
             // empty user data <=> login failed
             console.log('Log in 成功だよ！！'); // user info is in "data"
             setLoggedInScreen(data);
+            localStorage.setItem('saveEmail', data.email);
         } else {
             loginFailMessage();
         }

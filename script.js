@@ -158,6 +158,31 @@ function loginScreen(){
             }
         });
     });
+
+    //Sign up button
+    document.getElementById('signupBtn').addEventListener('click', (e)=>{
+
+        e.preventDefault();
+
+        let email = document.getElementById('signupEmail').value;
+        let password = document.getElementById('signupPassword').value;
+
+        let user = {
+            email: email,
+            password: password,
+            subscribe: false
+        };
+
+        fetch('http://localhost:5000/signup', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => setLoggedInScreen(data))
+    });
 }
 
 

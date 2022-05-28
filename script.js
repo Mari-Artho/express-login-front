@@ -1,3 +1,5 @@
+loginScreen();
+
 //Sign up button
 document.getElementById('signupBtn').addEventListener('click', (e)=>{
 
@@ -84,6 +86,7 @@ function setLoggedInScreen(data) {
   //click button => subscribe
   const setSubscribe = document.getElementById("subscribe");
   setSubscribe.addEventListener("click", settingSubscribe);
+
   //Subscribe button
   function settingSubscribe(){
      subscribeBtn.disabled = "disabled";
@@ -106,6 +109,7 @@ function setLoggedInScreen(data) {
   backBtn.id = "backLink"
   backBtn.addEventListener("click", backBtnClick)
   loginResult.append(backBtn);
+
   //back button
   function backBtnClick() {
       localStorage.removeItem("loggedIn")
@@ -126,7 +130,34 @@ function loginFailMessage(){
     
 }
 
+//show login screen
+function loginScreen(){
+    document.body.innerHTML = 
+    `<div id="adminMessage"></div>
 
+    <div id="loginResult">
+        <h2>Log in</h2>
+        <form>
+            <input type="text" id="email" placeholder="email/username">
+            <input type="password" id="password" placeholder="password">
+            <input type="submit" id="loginBtn" value="Log In">
+        </form>
+    </div>
 
+    <section>
+    <h2>Are you new? Sign up!</h2>
+    <div>
+        <form>
+            <input type="text" id="signupEmail" placeholder="email/username">
+            <input type="password" id="signupPassword" placeholder="password">
+            <input type="submit" id="signupBtn" value="Sign Up">
+        </form>
+    </div>
+    </section>
+    <ol id="signupForm"></ol>
+    <div id="subscribedTitle"></div>
+    <ol id="subscriber"></ol>
+    <div id="adminBtn"></div>`
+}
 
 

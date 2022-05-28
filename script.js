@@ -48,8 +48,9 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
         if (data.email != ""){ 
             // empty user data <=> login failed
             console.log('Log in 成功だよ！！'); // user info is in "data"
+            console.log(data)
             setLoggedInScreen(data);
-            localStorage.setItem('saveEmail', data.email);
+            localStorage.setItem('loggedIn', data._id);
         } else {
             loginFailMessage();
         }
@@ -90,8 +91,14 @@ function setLoggedInScreen(data) {
 
   //create back to page button.
   const backBtn = document.createElement("button");
-  backBtn.innerHTML = '<a id="backLink" href="index.html">Log out</a>';
+  backBtn.innerText = "Log out"
+  backBtn.addEventListener("click", backBtnClick)
   loginResult.append(backBtn);
+  //back button
+  function backBtnClick() {
+      localStorage.removeItem("loggedIn")
+      location.href = "index.html"
+  }
 
   //css, backBtn
   backBtn.style.height = "40px";

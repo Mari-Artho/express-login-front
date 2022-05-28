@@ -1,44 +1,12 @@
-loginScreen();
+const loggedIn = localStorage.getItem('loggedIn')
 
-//Sign up button
-document.getElementById('signupBtn').addEventListener('click', (e)=>{
-
-    e.preventDefault();
-
-    let email = document.getElementById('signupEmail').value;
-    let password = document.getElementById('signupPassword').value;
-
+if (loggedIn != null) {
     let user = {
-        email: email,
-        password: password,
-        subscribe: false
+        id: loggedIn
     };
+    console.log("Trying to restore session...")
 
-    fetch('http://localhost:5000/signup', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-    .then(res => res.json())
-    .then(data => setLoggedInScreen(data))
-});
-
-//Log in button
-document.getElementById('loginBtn').addEventListener('click', (e)=>{
-
-    e.preventDefault();
-
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-
-    let user = {
-        email: email,
-        password: password
-    };
-
-    fetch('http://localhost:5000/login', {
+    fetch('http://localhost:5000/restore', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -47,17 +15,18 @@ document.getElementById('loginBtn').addEventListener('click', (e)=>{
     })
     .then(res => res.json()) // parse result
     .then(data => {
-        if (data.email != ""){ 
-            // empty user data <=> login failed
-            console.log('Log in 成功だよ！！'); // user info is in "data"
-            console.log(data)
+        if (data.email != ""){
+            document.body.innerHTML = '<div id="loginResult"></div><section></section>'
             setLoggedInScreen(data);
-            localStorage.setItem('loggedIn', data._id);
         } else {
-            loginFailMessage();
+            loggedIn = null
         }
-    });
-});
+    })
+}
+
+if (loggedIn == null) {
+    loginScreen();
+}
 
 //Page to show in the browser when log in is successful
 function setLoggedInScreen(data) {
@@ -158,6 +127,37 @@ function loginScreen(){
     <div id="subscribedTitle"></div>
     <ol id="subscriber"></ol>
     <div id="adminBtn"></div>`
+    //Log in button
+    document.getElementById('loginBtn').addEventListener('click', (e)=>{
+
+        e.preventDefault();
+
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+
+        let user = {
+            email: email,
+            password: password
+        };
+
+        fetch('http://localhost:5000/login', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json()) // parse result
+        .then(data => {
+            if (data.email != ""){ 
+                // empty user data <=> login failed
+                setLoggedInScreen(data);
+                localStorage.setItem('loggedIn', data._id);
+            } else {
+                loginFailMessage();
+            }
+        });
+    });
 }
 
 

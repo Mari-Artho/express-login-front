@@ -92,6 +92,7 @@ function setLoggedInScreen(data) {
   //create back to page button.
   const backBtn = document.createElement("button");
   backBtn.innerText = "Log out"
+  backBtn.id = "backLink"
   backBtn.addEventListener("click", backBtnClick)
   loginResult.append(backBtn);
   //back button

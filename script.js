@@ -9,7 +9,9 @@ if (loggedIn != null) {
     fetch('http://localhost:5000/restore', {
         method: 'post',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
         },
         body: JSON.stringify(user)
     })
@@ -66,7 +68,9 @@ function setLoggedInScreen(data) {
     fetch('http://localhost:5000/subscribe', {
         method: 'put',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
     },
     body: JSON.stringify(data)
     })
@@ -143,7 +147,9 @@ function loginScreen(){
         fetch('http://localhost:5000/login', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
             },
             body: JSON.stringify(user)
         })
@@ -176,7 +182,9 @@ function loginScreen(){
         fetch('http://localhost:5000/signup', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
             },
             body: JSON.stringify(user)
         })

@@ -1,17 +1,17 @@
 const loggedIn = localStorage.getItem('loggedIn')
 
+const HOST = 'https://expressloginnews.herokuapp.com/'
+
 if (loggedIn != null) {
     let user = {
         id: loggedIn
     };
     console.log("Trying to restore session...")
 
-    fetch('http://localhost:5000/restore', {
+    fetch(HOST + 'restore', {
         method: 'post',
         headers: {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
     })
@@ -65,12 +65,10 @@ function setLoggedInScreen(data) {
 
     data.subscribe = !data.subscribe;
 
-    fetch('http://localhost:5000/subscribe', {
+    fetch(HOST + 'subscribe', {
         method: 'put',
     headers: {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+        'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
     })
@@ -144,12 +142,10 @@ function loginScreen(){
             password: password
         };
 
-        fetch('http://localhost:5000/login', {
+        fetch(HOST + 'login', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         })
@@ -179,12 +175,10 @@ function loginScreen(){
             subscribe: false
         };
 
-        fetch('http://localhost:5000/signup', {
+        fetch(HOST + 'signup', {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         })
